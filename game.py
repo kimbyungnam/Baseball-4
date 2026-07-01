@@ -15,9 +15,14 @@ class Game:
 
     def guess(self, guess_number: str) -> GameResult | None:
         self._assert_illegal_value(guess_number)
+        strikes = 0
         if guess_number == self._question:
             return GameResult(True, 3, 0)
-        return GameResult(False, 0, 0)
+        if guess_number[0] == self._question[0]:
+            strikes += 1
+        if guess_number[1] == self._question[1]:
+            strikes += 1
+        return GameResult(False, strikes, 0)
 
     def _assert_illegal_value(self, guess_number: str):
         if guess_number is None:

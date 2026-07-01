@@ -40,3 +40,11 @@ def test_return_solved_result_if_unmatched_number(game):
     result: GameResult = game.guess("456")
 
     assert_matched_number(result, solved=False, strikes=0, balls=0)
+
+
+def test_return_solved_result_if_2_strikes_0_ball_number(game):
+    game.question = "123"
+
+    result: GameResult = game.guess("124")
+
+    assert_matched_number(result, solved=False, strikes=2, balls=0)
