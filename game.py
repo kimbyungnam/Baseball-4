@@ -24,7 +24,17 @@ class Game:
             for number, question in zip(guess_number, self._question)
             if number == question
         )
-        return GameResult(False, strikes, 0)
+
+        balls = 0
+        if guess_number[0] in self._question:
+            balls += 1
+        if guess_number[1] in self._question:
+            balls += 1
+        if guess_number[2] in self._question:
+            balls += 1
+        balls -= strikes
+
+        return GameResult(False, strikes, balls)
 
     def _assert_illegal_value(self, guess_number: str):
         if guess_number is None:

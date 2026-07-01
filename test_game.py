@@ -49,3 +49,11 @@ def test_return_solved_result_if_2_strikes_0_ball_number(game, input):
     result: GameResult = game.guess(input)
 
     assert_matched_number(result, solved=False, strikes=2, balls=0)
+
+
+def test_return_solved_result_if_1_strikes_2_ball_number(game):
+    game.question = "123"
+
+    result: GameResult = game.guess("132")
+
+    assert_matched_number(result, solved=False, strikes=1, balls=2)
