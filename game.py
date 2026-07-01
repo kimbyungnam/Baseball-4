@@ -8,3 +8,7 @@ class Game:
 
         if not guess_number.isdigit():
             raise TypeError()
+
+        if guess_number[0] == guess_number[1] or guess_number[1] == guess_number[2] or guess_number[0] == guess_number[
+            2]:
+            raise TypeError()
