@@ -16,25 +16,19 @@ class Game:
     def guess(self, guess_number: str) -> GameResult | None:
         self._assert_illegal_value(guess_number)
 
-        if guess_number == self._question:
-            return GameResult(True, 3, 0)
-
         strikes = sum(
             1
             for number, question in zip(guess_number, self._question)
             if number == question
         )
 
-        balls = 0
-        if guess_number[0] in self._question:
-            balls += 1
-        if guess_number[1] in self._question:
-            balls += 1
-        if guess_number[2] in self._question:
-            balls += 1
-        balls -= strikes
+        balls = -strikes + sum(
+            1
+            for number in guess_number
+            if number in self._question
+        )
 
-        return GameResult(False, strikes, balls)
+        return GameResult(strikes == 3, strikes, balls)
 
     def _assert_illegal_value(self, guess_number: str):
         if guess_number is None:
